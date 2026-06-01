@@ -102,7 +102,11 @@
     form.reset();
     weightError.textContent = "";
     heightError.textContent = "";
+    weightInput.setAttribute("aria-invalid", "false");
+    heightInput.setAttribute("aria-invalid", "false");
     resultEl.className = "result";
     resultEl.innerHTML = "";
+    // Return focus to first input for better keyboard flow
+    weightInput.focus();
   });
 })();
