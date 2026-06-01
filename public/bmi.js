@@ -13,12 +13,14 @@
   if (localStorage.getItem("bmi-theme") === "dark") {
     document.body.classList.add("dark");
     themeToggle.textContent = "☀️";
+    themeToggle.setAttribute("aria-pressed", "true");
   }
 
   themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
     themeToggle.textContent = isDark ? "☀️" : "🌙";
+    themeToggle.setAttribute("aria-pressed", String(isDark));
     localStorage.setItem("bmi-theme", isDark ? "dark" : "light");
   });
 
@@ -52,25 +54,29 @@
     };
   }
 
-  // Validate single input
-  function validate(value, errorEl, label) {
+  // Validate single input and manage aria-invalid
+  function validate(inputEl, errorEl, label) {
+    const value = inputEl.value;
     if (value === "" || isNaN(value)) {
       errorEl.textContent = `Please enter a valid ${label}.`;
+      inputEl.setAttribute("aria-invalid", "true");
       return false;
     }
     const num = parseFloat(value);
     if (num <= 0) {
       errorEl.textContent = `${label} must be greater than zero.`;
+      inputEl.setAttribute("aria-invalid", "true");
       return false;
     }
     errorEl.textContent = "";
+    inputEl.setAttribute("aria-invalid", "false");
     return true;
   }
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const wOk = validate(weightInput.value, weightError, "weight");
-    const hOk = validate(heightInput.value, heightError, "height");
+    const wOk = validate(weightInput, weightError, "weight");
+    const hOk = validate(heightInput, heightError, "height");
     if (!wOk || !hOk) return;
 
     const weight = parseFloat(weightInput.value);
@@ -84,17 +90,23 @@
     void resultEl.offsetWidth;
     resultEl.classList.add("show", info.cls);
     resultEl.innerHTML = `
-      <div class="bmi-value">${rounded}</div>
+      <div class="bmi-value" aria-label="B M I value ${rounded}">${rounded}</div>
       <div class="bmi-category">${info.category}</div>
       <div class="bmi-message">${info.message}</div>
     `;
+    // Move focus to result so screen readers announce it and keyboard users are positioned there
+    resultEl.focus();
   });
 
   resetBtn.addEventListener("click", () => {
     form.reset();
     weightError.textContent = "";
     heightError.textContent = "";
+    weightInput.setAttribute("aria-invalid", "false");
+    heightInput.setAttribute("aria-invalid", "false");
     resultEl.className = "result";
     resultEl.innerHTML = "";
+    // Return focus to first input for better keyboard flow
+    weightInput.focus();
   });
 })();

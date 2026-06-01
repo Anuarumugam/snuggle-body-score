@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/bmi.css" />
 </head>
 <body>
-  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">🌙</button>
 
   <main class="container">
     <header class="header">
@@ -19,14 +19,14 @@
       <form id="bmiForm" novalidate>
         <div class="field">
           <label for="weight">Weight (kg)</label>
-          <input type="number" id="weight" name="weight" min="1" max="500" step="0.1" placeholder="e.g. 70" required />
-          <span class="error" id="weightError"></span>
+          <input type="number" id="weight" name="weight" min="1" max="500" step="0.1" placeholder="e.g. 70" required aria-invalid="false" aria-describedby="weightError" />
+          <span class="error" id="weightError" aria-live="polite" aria-atomic="true"></span>
         </div>
 
         <div class="field">
           <label for="height">Height (cm)</label>
-          <input type="number" id="height" name="height" min="30" max="300" step="0.1" placeholder="e.g. 175" required />
-          <span class="error" id="heightError"></span>
+          <input type="number" id="height" name="height" min="30" max="300" step="0.1" placeholder="e.g. 175" required aria-invalid="false" aria-describedby="heightError" />
+          <span class="error" id="heightError" aria-live="polite" aria-atomic="true"></span>
         </div>
 
         <div class="buttons">
@@ -35,20 +35,20 @@
         </div>
       </form>
 
-      <div id="result" class="result" aria-live="polite"></div>
+      <div id="result" class="result" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
     </section>
 
-    <section class="card reference" aria-label="BMI reference table">
-      <h2>BMI Reference</h2>
+    <section class="card reference" aria-labelledby="ref-heading">
+      <h2 id="ref-heading">BMI Reference</h2>
       <table>
         <thead>
-          <tr><th>Category</th><th>BMI Range</th></tr>
+          <tr><th scope="col">Category</th><th scope="col">BMI Range</th></tr>
         </thead>
         <tbody>
-          <tr><td><span class="dot underweight"></span>Underweight</td><td>&lt; 18.5</td></tr>
-          <tr><td><span class="dot normal"></span>Normal</td><td>18.5 – 24.9</td></tr>
-          <tr><td><span class="dot overweight"></span>Overweight</td><td>25 – 29.9</td></tr>
-          <tr><td><span class="dot obese"></span>Obese</td><td>≥ 30</td></tr>
+          <tr><th scope="row"><span class="dot underweight" aria-hidden="true"></span>Underweight</th><td>&lt; 18.5</td></tr>
+          <tr><th scope="row"><span class="dot normal" aria-hidden="true"></span>Normal</th><td>18.5 – 24.9</td></tr>
+          <tr><th scope="row"><span class="dot overweight" aria-hidden="true"></span>Overweight</th><td>25 – 29.9</td></tr>
+          <tr><th scope="row"><span class="dot obese" aria-hidden="true"></span>Obese</th><td>≥ 30</td></tr>
         </tbody>
       </table>
     </section>
