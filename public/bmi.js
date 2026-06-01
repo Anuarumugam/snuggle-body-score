@@ -75,8 +75,8 @@
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const wOk = validate(weightInput.value, weightError, "weight");
-    const hOk = validate(heightInput.value, heightError, "height");
+    const wOk = validate(weightInput, weightError, "weight");
+    const hOk = validate(heightInput, heightError, "height");
     if (!wOk || !hOk) return;
 
     const weight = parseFloat(weightInput.value);
