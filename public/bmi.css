@@ -92,7 +92,11 @@ body {
   outline: none;
   transition: border-color 0.2s ease;
 }
-.field input:focus { border-color: var(--primary); }
+.field input:focus {
+  border-color: var(--primary);
+  outline: 3px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  outline-offset: 2px;
+}
 .error {
   display: block;
   color: var(--obese);
