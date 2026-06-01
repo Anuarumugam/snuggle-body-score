@@ -54,18 +54,22 @@
     };
   }
 
-  // Validate single input
-  function validate(value, errorEl, label) {
+  // Validate single input and manage aria-invalid
+  function validate(inputEl, errorEl, label) {
+    const value = inputEl.value;
     if (value === "" || isNaN(value)) {
       errorEl.textContent = `Please enter a valid ${label}.`;
+      inputEl.setAttribute("aria-invalid", "true");
       return false;
     }
     const num = parseFloat(value);
     if (num <= 0) {
       errorEl.textContent = `${label} must be greater than zero.`;
+      inputEl.setAttribute("aria-invalid", "true");
       return false;
     }
     errorEl.textContent = "";
+    inputEl.setAttribute("aria-invalid", "false");
     return true;
   }
 
