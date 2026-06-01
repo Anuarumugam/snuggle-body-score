@@ -19,6 +19,7 @@
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
     themeToggle.textContent = isDark ? "☀️" : "🌙";
+    themeToggle.setAttribute("aria-pressed", String(isDark));
     localStorage.setItem("bmi-theme", isDark ? "dark" : "light");
   });
 
