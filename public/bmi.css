@@ -53,6 +53,10 @@ body {
   transition: transform 0.2s ease;
 }
 .theme-toggle:hover { transform: scale(1.1); }
+.theme-toggle:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 50%, transparent);
+  outline-offset: 3px;
+}
 
 .container {
   max-width: 480px;
