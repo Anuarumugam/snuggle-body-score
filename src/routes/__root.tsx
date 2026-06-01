@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { supabase } from "@/integrations/supabase/client";
+import { SiteHeader } from "@/components/site-header";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -77,18 +80,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "A web application to calculate and track your Body Mass Index (BMI)." },
+      { title: "TruthGuard AI — Detect Fake News with AI" },
+      { name: "description", content: "TruthGuard AI uses advanced AI to detect fake news, misinformation, and assess news credibility in seconds." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "A web application to calculate and track your Body Mass Index (BMI)." },
+      { property: "og:title", content: "TruthGuard AI" },
+      { property: "og:description", content: "AI-powered fake news detection and verification platform." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "A web application to calculate and track your Body Mass Index (BMI)." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d34cbf4f-3ebc-4aca-afef-d4c5a2447a9d/id-preview-5cb1d9dc--37eca364-e4c0-4e1d-9f8a-8714ca84dba7.lovable.app-1780288508844.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d34cbf4f-3ebc-4aca-afef-d4c5a2447a9d/id-preview-5cb1d9dc--37eca364-e4c0-4e1d-9f8a-8714ca84dba7.lovable.app-1780288508844.png" },
+      { name: "twitter:title", content: "TruthGuard AI" },
+      { name: "twitter:description", content: "AI-powered fake news detection and verification platform." },
     ],
     links: [
       {
@@ -119,11 +120,25 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      router.invalidate();
+      queryClient.invalidateQueries();
+    });
+    return () => subscription.unsubscribe();
+  }, [router, queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+      </div>
+      <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );
 }
