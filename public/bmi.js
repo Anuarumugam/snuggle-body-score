@@ -13,6 +13,7 @@
   if (localStorage.getItem("bmi-theme") === "dark") {
     document.body.classList.add("dark");
     themeToggle.textContent = "☀️";
+    themeToggle.setAttribute("aria-pressed", "true");
   }
 
   themeToggle.addEventListener("click", () => {
