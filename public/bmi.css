@@ -125,6 +125,10 @@ body {
   transition: background 0.2s ease, transform 0.1s ease;
 }
 .btn:active { transform: scale(0.98); }
+.btn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 50%, transparent);
+  outline-offset: 3px;
+}
 .btn-primary { background: var(--primary); color: #fff; }
 .btn-primary:hover { background: var(--primary-hover); }
 .btn-secondary { background: var(--secondary); color: var(--text); }
