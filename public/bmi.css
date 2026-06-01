@@ -144,6 +144,10 @@ body {
   border-radius: 12px;
   text-align: center;
 }
+.result:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 50%, transparent);
+  outline-offset: 2px;
+}
 .result.show {
   max-height: 300px;
   opacity: 1;
