@@ -90,10 +90,12 @@
     void resultEl.offsetWidth;
     resultEl.classList.add("show", info.cls);
     resultEl.innerHTML = `
-      <div class="bmi-value">${rounded}</div>
+      <div class="bmi-value" aria-label="B M I value ${rounded}">${rounded}</div>
       <div class="bmi-category">${info.category}</div>
       <div class="bmi-message">${info.message}</div>
     `;
+    // Move focus to result so screen readers announce it and keyboard users are positioned there
+    resultEl.focus();
   });
 
   resetBtn.addEventListener("click", () => {
