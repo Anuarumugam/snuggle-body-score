@@ -38,17 +38,17 @@
       <div id="result" class="result" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
     </section>
 
-    <section class="card reference" aria-label="BMI reference table">
-      <h2>BMI Reference</h2>
+    <section class="card reference" aria-labelledby="ref-heading">
+      <h2 id="ref-heading">BMI Reference</h2>
       <table>
         <thead>
-          <tr><th>Category</th><th>BMI Range</th></tr>
+          <tr><th scope="col">Category</th><th scope="col">BMI Range</th></tr>
         </thead>
         <tbody>
-          <tr><td><span class="dot underweight"></span>Underweight</td><td>&lt; 18.5</td></tr>
-          <tr><td><span class="dot normal"></span>Normal</td><td>18.5 – 24.9</td></tr>
-          <tr><td><span class="dot overweight"></span>Overweight</td><td>25 – 29.9</td></tr>
-          <tr><td><span class="dot obese"></span>Obese</td><td>≥ 30</td></tr>
+          <tr><th scope="row"><span class="dot underweight" aria-hidden="true"></span>Underweight</th><td>&lt; 18.5</td></tr>
+          <tr><th scope="row"><span class="dot normal" aria-hidden="true"></span>Normal</th><td>18.5 – 24.9</td></tr>
+          <tr><th scope="row"><span class="dot overweight" aria-hidden="true"></span>Overweight</th><td>25 – 29.9</td></tr>
+          <tr><th scope="row"><span class="dot obese" aria-hidden="true"></span>Obese</th><td>≥ 30</td></tr>
         </tbody>
       </table>
     </section>
